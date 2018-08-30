@@ -1,0 +1,52 @@
+#jm-footer-mod{
+    padding:  0;
+    display:  flex;
+    align-items:  center;
+    justify-content:  center;
+    .container-fluid{
+        padding:  30px 15px;
+        width:  950px;
+        max-width:  950px;
+        @media (max-width: 576px) {
+            padding: 15px 15px;
+        }
+        .row-fluid{
+            .span12{
+                padding:  0;
+                .jm-module{
+                    &:nth-child(1){
+                        margin:  0;
+                    position:  static;
+                    margin-bottom: 30px;
+                    @media (max-width: 576px) {
+                        margin-bottom:10px;
+                    }
+                    .jm-module-in{
+                        .jm-module-content{
+                            .nav{
+                                display:  flex;
+                                flex-direction:  row;
+                                justify-content: space-evenly;
+                                align-items:  center;
+                                @media (max-width: 576px) {
+                                    flex-direction: column;
+                                }
+                                li{
+                                    margin:  0;
+                                    @media (max-width: 576px) {
+                                        margin-bottom: 7px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    }
+                    &:nth-child(2){
+                        margin: 0;
+                        position: static;
+                    }
+                }
+            }
+        }
+    }
+}

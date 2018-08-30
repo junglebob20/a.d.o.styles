@@ -1,0 +1,28 @@
+.dj-up {
+                        &:nth-child(1) {
+                            margin-right: 10px;
+                            .dj-up_a {
+                                background: none;
+                                border: 2px solid hsla(0, 0%, 100%, .3);
+                                border-radius: 3px;
+                                padding: 5px 10px;
+                                transition: border .2s ease;
+                                &:hover {
+                                    border-color: #fff;
+                                }
+                            }
+                        }
+                        &:nth-child(2) {
+                            height: 56px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            padding: 0 15px;
+                            .dj-up_a {}
+                        }
+                        .dj-up_a {
+                            margin: 0;
+                            padding: 10px;
+                            span {}
+                        }
+                    }

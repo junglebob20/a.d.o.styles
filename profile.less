@@ -1,0 +1,422 @@
+.main-top-background {
+    background-position: 50% 50% !important;
+    background-repeat: no-repeat !important;
+    overflow: hidden;
+    background-size: cover;
+    height: 166px;
+    background-image: url(https://static.offerup.com/web/images/profile-default-bg.91abb67f.jpg);
+}
+
+#easyprofile {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    @media (max-width: 576px) { 
+        display: flex;
+        flex-direction: column!important;
+        justify-content: center;
+        align-items: center!important;
+    }
+    @media (max-width: 768px) { 
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+    }
+    .user-info-wrapper {
+        width:42%;
+        padding: 0 15px;
+        @media (max-width: 576px) { 
+            width: 100%!important;
+            padding: 15px 0;
+            padding-bottom: 0;
+        }
+        @media (max-width: 768px) { 
+            width: 53%;
+        }
+        .user-info-details {
+            display: flex;
+            flex-direction: column;
+            margin-top: -90px;
+            padding: 15px;
+            .profile-img {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 0.25rem;
+                img {
+                    background-position: 50% 50% !important;
+                    background-repeat: no-repeat !important;
+                    overflow: hidden;
+                    background-size: cover;
+                    border-radius: 50%;
+                    width: 160px;
+                    height: 160px;
+                    border: 2px solid #d8d8d8;
+                }
+            }
+        }
+        .profile-location {
+            @media (max-width: 576px) { 
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                margin-top: 10px;
+            }
+            .profile-name {
+                font-size: 24px;
+                line-height: 32px;
+                font-weight: 700;
+                color: inherit;
+                margin-bottom: 0.5rem;
+                color: #4a4a4a;
+            }
+            .profile-date-join {
+                display: block;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                margin-bottom: .5rem;
+                font-weight: 400;
+                color: inherit;
+                color: #4a4a4a;
+            }
+            .last-visit-date{
+                display: block;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                margin-bottom: 1rem;
+                font-weight: 400;
+                color: #4a4a4a;
+            }
+        }
+        #user-location{
+            position: relative;
+    overflow: hidden;
+    height: 116px;
+    border-radius: 6px;
+        }
+    }
+    .user-items-wrapper {
+        width: 58%;
+        padding: 0 15px;
+        @media (max-width: 576px) { 
+            width: 100%!important;
+            padding: 15px 0;
+            padding-bottom: 0;
+        }
+        @media (max-width: 768px) { 
+            width: 47%;
+        }
+        .user-items {
+            .user-items-header {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                padding: 20px .5rem;
+                border-bottom: 1px solid #e4e4e4;
+                margin-left: .5rem;
+                .user-items-count {
+                    display: inline-block;
+                    color: inherit;
+                    font-weight: 700;
+                    font-size: 1.1rem;
+                }
+                .user-items-text {
+                    font-weight: 400;
+                    display: inline-block;
+                    color: #4a4a4a;
+                    margin-left: 0.4rem;
+                    margin-top: 1px;
+                }
+            }
+            .user-items-body {
+                padding: 25px 0;
+                display: flex;
+                .user-item-link{
+                    display: flex;
+                    padding: 0.5rem;
+                    height: min-content;
+                    &:hover,&:focus{
+                        text-decoration: none;
+                    }
+                    .card {
+                        position: relative;
+                        display: flex;
+                        flex-direction: column;
+                        min-width: 0;
+                        word-wrap: break-word;
+                        background-color: #fff;
+                        background-clip: border-box;
+                        border: 1px solid rgba(0,0,0,.125);
+                        border-radius: .25rem;
+                        width: 100%;
+                        border: 1px solid #d8d8d8;
+                        border-radius: 6px;
+                        &:hover{
+                            background-color: #f4f4f4;
+                        }
+                        .card-img-top {
+                            width: 100%;
+                            border-top-left-radius: calc(.25rem - 1px);
+                            border-top-right-radius: calc(.25rem - 1px);
+                        }
+                        .card-body {
+                            padding: 0.75rem;
+                            flex: 1 1 auto;
+                            .card-title {
+                                font-size: 18px;
+                                line-height: 24px;
+                                color: #4a4a4a;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                font-weight: 600;
+                                margin-bottom: 0.25rem;
+                            }
+                            .card-price {
+                                font-size: 20px;
+                                line-height: 28px;
+                                color: #4a4a4a;
+                                font-weight: 700;
+                                margin-bottom: 0.25rem;
+                            }
+                            .card-location {
+                                font-size: 14px;
+                                line-height: 20px;
+                                color: #969696;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                margin: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        #member-profile{
+            min-height: auto;
+            padding: 15px;
+            border-radius: 0;
+            box-shadow: none;
+            margin: 0;
+            margin-bottom: 15px;
+            #jsn-form{
+                .z-tabs-nav{
+                    display: none!important;
+                }
+                .z-dropdown-arrow{
+                    display: none!important;
+                }
+                #jsn-profile-tabs{
+                    display: none!important;
+                }
+                .z-container{
+                    .z-content{
+                        &:nth-child(1){
+                            .z-content-inner{
+                                padding: 0;
+                                .jsn-form-fieldset{
+                                    .control-group{
+                                        margin: 0;
+                                        &:nth-child(7),&:nth-child(8){
+                                            display: none;
+                                        }
+                                        .control-label{
+                                            width: 100%;
+                                            padding: 0;
+                                            text-align: left;
+                                            label{
+                                                margin: 0;
+                                                display: block;
+                                                padding: 15px 0;
+                                                color: #212121;
+                                                font-size: 15px;
+                                                font-weight: 600;
+                                                text-transform: none;
+                                            }
+                                        }
+                                        .controls{
+                                            margin: 0;
+                                            input[type="text"],input[type="email"],input[type="password"]{
+                                                background-color: #fff;
+                                                border: 0;
+                                                padding: 10px;
+                                                border: 1px solid #a4a3a2;
+                                                background: #fff;
+                                                width: 100%;
+                                                font-family: Source Sans Pro,Helvetica Neue,Helvetica,Arial,sans-serif;
+                                                display: inline;
+                                                border-radius: 6px;
+                                                height: 42px;
+                                                font-size: 15px;
+                                            }
+                                            #jform_username{
+                                                background-color: #eee;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        &:nth-child(2){
+                            display: none!important;
+                        }
+                        &:nth-child(3){
+                            display: none!important;
+                        }
+                    }
+                }
+            }
+            .control-group{
+                margin: 0;
+                .jsn_registration_controls{
+                    a{
+                        display: none;
+                    }
+                    button[type="submit"]{
+                        font-size: 20px;
+                        line-height: 20px;
+                        padding: 10px 20px;
+                        background-color: #00ab80;
+                        border-color: transparent;
+                        width: 100%;
+                        margin-top: 20px;
+                        color:#fff;
+                        &:hover{
+                            background-color: #009770;
+                        }
+                        &:focus{
+                            border-color: #008765;
+                            outline: 0;
+                            box-shadow: none;
+                        }
+                        &:active{
+                            background-color: #008765;
+                            outline: 0;
+                        }
+                    }
+                }
+            }
+
+
+            .form-group{
+                label{
+                    display: block;
+                    padding: 15px 0;
+                    color: #212121;
+                    font-size: 15px;
+                    font-weight: 600;
+                    text-transform: none;
+                }
+                .form-control{
+                    padding: 10px;
+                    border: 1px solid #a4a3a2;
+                    background: #fff;
+                    width: 100%;
+                    font-family: Source Sans Pro,Helvetica Neue,Helvetica,Arial,sans-serif;
+                    display: inline;
+                    border-radius: 6px;
+                    height: 42px;
+                }
+                button[type="submit"]{
+                    font-size: 20px;
+                    line-height: 20px;
+                    padding: 10px 20px;
+                    background-color: #00ab80;
+                    border-color: transparent;
+                    width: 100%;
+                    margin-top: 20px;
+                    color:#fff;
+                    &:hover{
+                        background-color: #009770;
+                    }
+                    &:focus{
+                        border-color: #008765;
+                        outline: 0;
+                        box-shadow: none;
+                    }
+                    &:active{
+                        background-color: #008765;
+                        outline: 0;
+                    }
+                }
+                #imgupload_avatar{
+                    width: 130px;
+                    border-radius: 5px;
+                    overflow: hidden;
+                    background-image: url(/components/com_jsn/assets/img/default.jpg);
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    position: relative;
+                    height: 130px;
+                    #imgpreview_avatar{
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                    }
+                    input[type="file"]{
+                        overflow: hidden;
+                        position: relative;
+                        opacity: 0!important;
+                        height: 100%;
+                        width: 100%;
+                        z-index: 10;
+                    }
+                    .slim-label{
+                        position: absolute;
+                        top: 0;
+                        max-width: 100%;
+                        padding: 0 1.5em;
+                        bottom: 0;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        text-align: center;
+                        z-index: 5;
+                        padding: 0;
+                        width: 100%;
+                        height: 100%;
+                        
+                        p{
+                            font-size: 14px;
+                        }
+                    }
+                    .remover-wrapper{
+                        button{
+                            opacity: 1;
+                            background-image: url("data:image/svg+xml;charset=utf-8,%3CsvgviewBox='00269269'xmlns='http://www.….43zm-57.2740H107.39l.002-17.914h53.695V35.81z'fill='%23fff'/%3E%3C/svg%3E");
+                            position: relative;
+                            padding: 0;
+                            margin: 0 7.2px;
+                            font-size: 0;
+                            outline: 0;
+                            width: 36px;
+                            height: 36px;
+                            border: 2px solid;
+                            color: #fff;
+                            background-color: rgba(0,0,0,.7);
+                            background-repeat: no-repeat;
+                            background-size: 50% 50%;
+                            background-position: 50%;
+                            border-radius: 50%;
+                            pointer-events: all;
+                            cursor: pointer;
+                            -webkit-highlight: none;
+                            -webkit-tap-highlight-color: transparent;
+                            margin: 0;
+                            opacity: 1;
+                            position: absolute;
+                            top: 80px;
+                            left: 50px;                        
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

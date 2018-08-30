@@ -1,0 +1,459 @@
+<?php
+#mod_djcf_search430,#mod_djcf_search431{
+    display: flex!important;
+    border-radius: 2px!important;
+    form{
+        width: 100%!important;
+        margin-right: 60px!important;
+        .search_buttons{
+            .btn{
+                background-color: #ececec!important;
+                border-top-right-radius: 3px!important;
+                color: #969696!important;
+                border-bottom-right-radius: 3px!important;
+                width: 60px!important;
+                right: 0px!important;
+                border-left: 1px solid #bcbcbc!important;
+            }
+        }
+    }
+}
+/**
+
+* @version		2.0
+
+* @package		DJ Classifieds
+
+* @subpackage	DJ Classifieds Component
+
+* @copyright	Copyright (C) 2010 DJ-Extensions.com LTD, All rights reserved.
+
+* @license		http://www.gnu.org/licenses GNU/GPL
+
+* @autor url    http://design-joomla.eu
+
+* @autor email  contact@design-joomla.eu
+
+* @Developer    Lukasz Ciastek - lukasz.ciastek@design-joomla.eu
+
+*
+
+*
+
+* DJ Classifieds is free software: you can redistribute it and/or modify
+
+* it under the terms of the GNU General Public License as published by
+
+* the Free Software Foundation, either version 3 of the License, or
+
+* (at your option) any later version.
+
+*
+
+* DJ Classifieds is distributed in the hope that it will be useful,
+
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+
+* GNU General Public License for more details.
+
+*
+
+* You should have received a copy of the GNU General Public License
+
+* along with DJ Classifieds. If not, see <http://www.gnu.org/licenses/>.
+
+*
+
+*/
+
+
+
+defined ('_JEXEC') or die('Restricted access');
+
+JHTML::_('behavior.framework',true);
+
+JHTML::_('behavior.formvalidation');
+
+JHTML::_('behavior.calendar');
+
+$par = JComponentHelper::getParams( 'com_djclassifieds' );
+
+$app = JFactory::getApplication();
+
+$config = JFactory::getConfig();
+
+$user =  JFactory::getUser();
+
+$Itemid = JRequest::getVar('Itemid', 0,'', 'int');
+
+$item = $this->item;
+
+$item_class='';
+
+
+
+$icon_new_a	= $par->get('icon_new','1');
+
+$icon_new_date = mktime(date("G"), date("i"), date("s"), date("m"), date("d")-$par->get('icon_new_time','3'), date("Y"));
+
+$date_start = strtotime($item->date_start);
+
+$icon_new=0;
+
+	if($item->promotions){
+
+		$item_class .=' promotion '.str_ireplace(',', ' ', $item->promotions);
+
+	}
+
+	if($date_start>$icon_new_date && $icon_new_a){
+
+		$icon_new=1;
+
+		$item_class .= ' item_new';
+
+	}
+
+
+
+	if($item->auction){
+
+		$item_class .=' item_auction';
+
+	}
+
+
+
+	if($par->get('favourite','1') && $user->id>0){
+
+		if($item->f_id){ $item_class .= ' item_fav'; }
+
+	}
+
+
+
+	if($item->user_id && isset($this->profile['details']->verified)){
+
+		if($this->profile['details']->verified==1){
+
+			$item_class .= ' verified_profile';
+
+		}
+
+	}
+
+
+
+	$menus	= $app->getMenu('site');
+
+	$menu_newad_m = $menus->getItems('link','index.php?option=com_djclassifieds&view=additem',1);
+
+	$menu_newad_itemid='';
+
+	if($menu_newad_m){
+
+		$menu_newad_itemid = '&Itemid='.$menu_newad_m->id;
+
+	}
+
+
+
+	$pageclass_sfx ='';
+
+	if($Itemid){
+
+		$menu_item = $app->getMenu()->getItem($Itemid);
+
+		$pc_sfx = $menu_item->params->get('pageclass_sfx');
+
+		if($pc_sfx){$pageclass_sfx =' '.$pc_sfx;}
+
+	}
+
+
+
+$mod_attribs=array();
+
+$mod_attribs['style'] = 'xhtml';
+
+function getImageOffer($item_id){
+    $db = JFactory::getDbo();
+    $query = $db->getQuery(true);
+    $query="SELECT `id`,`name`,`ext`,`path` FROM `#__djcf_images` WHERE `item_id`='".$item_id."'";
+    $db->setQuery($query);
+    return $db->loadObjectList(); 
+  }
+  function offerDetails($id){
+    $db = JFactory::getDbo();
+    $query = $db->getQuery(true);
+    $query = "SELECT * FROM `#__djcf_items` WHERE `user_id`='".$id."' ORDER BY `date_exp` DESC";
+    $db->setQuery($query);
+    return $db->loadObjectList();
+}
+$itemIgames=getImageOffer($item->id);
+$itemUser=JsnHelper::getUser($item->user_id);
+$userItems=offerDetails($item->user_id);
+var_dump($item);
+?>
+
+
+
+	<div id="dj-item-custome" class="clearfix djcftheme-<?php echo $this->theme;?><?php echo $pageclass_sfx;?>">
+		<div id="dj-item">
+			<div class="dj-item-header">
+				<?php if(count($itemIgames)>0){?>
+				<div class="hide-in-ie" style="position:absolute;left:0;top:0;filter:blur(15px);-webkit-filter:blur(15px);opacity:0.5;background-image:url('<?php echo $itemIgames[0]->path.$itemIgames[0]->name.'.'.$itemIgames[0]->ext;?>');background-size:cover;width:100%;height:100%;background-position:center"></div>
+				<div class="swiper-container" id="swiper-img">
+					<?php foreach($itemIgames as $k => $itemImage){?>
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<div class="slider-image">
+								<img src="<?php echo $itemImage->path.$itemImage->name.'.'.$itemImage->ext;?>" alt="">
+							</div>
+						</div>
+					</div>
+					<?php }?>
+				</div>
+				<script>
+					jQuery(document).ready(function () {
+						if (jQuery(window).width() <= jQuery('#swiper-img').width()) {
+							jQuery('#swiper-img > div.swiper-wrapper').css('justify-content',
+								'flex-start');
+							var swiper = new Swiper('#swiper-img', {
+								slidesPerView: 3,
+								spaceBetween: 3,
+								freeMode: true,
+								breakpoints: {
+									576: {
+										slidesPerView: 1,
+										spaceBetween: 3,
+										pagination: {
+											el: '.swiper-pagination',
+											clickable: true,
+										}
+									},
+									768: {
+										slidesPerView: 2,
+										spaceBetween: 10
+									}
+								}
+							});
+							console.log(swiper);
+						}
+					});
+				</script>
+			</div>
+			<div class="swiper-pagination"></div>
+			<?php }?>
+			<div class="dj-item-body">
+				<div class="dj-item-wrapper">
+					<div class="dj-item-details">
+						<div class="item-info">
+							<div class="item-price-subject">
+								<?php if($item->price || $item->price_negotiable){?>
+								<?php if($item->price){?>
+								<div class="price">
+									<?php echo DJClassifiedsTheme::priceFormat($item->price,$item->currency);?>
+								</div>
+								<?php }?>
+
+								<?php }?>
+								<?php if($item->name){?>
+								<div class="subject">
+									<?php echo $item->name?>
+								</div>
+								<?php }?>
+							</div>
+							<div class="item-date-posted">
+
+								Posted 7 minutes ago in Clothing & Shoes in Los Angeles, CA
+							</div>
+						</div>
+
+						<?php if($item->description){?>
+						<div class="item-description">
+							<?php
+									if($par->get('desc_plugins','')){
+										echo JHTML::_('content.prepare',$item->description);
+									}else{
+										echo $item->description;
+									}
+								?>
+						</div>
+						<?php }?>
+
+						<?php if($item->latitude!='0.000000000000000' && $item->longitude!='0.000000000000000'){ ?>
+						<div class="profile-location" id="user-location">
+
+						</div>
+						<script>
+							function initMap() {
+								var position = {
+									lat: <?php echo $item->latitude;?>,
+									lng: <?php echo $item->longitude;?>
+								};
+								var map = new google.maps.Map(document.getElementById(
+									'user-location'), {
+									center: position,
+									zoom: 8
+								});
+								var marker = new google.maps.Marker({
+									position: position,
+									map: map
+								});
+								setTimeout(function () {
+									jQuery('#user-location').append(
+										'<div style="position: absolute;z-index: 1;left: 50%;top: 50%;transform: translate(0px, 0px);"><div style="width: 80px;height: 80px;background-image:  green;border-radius:  50%;opacity: 0.5;position:  absolute;top: -40px;left: -40px;"></div></div>'
+									);
+								}, 1000);
+							}
+							initMap();
+						</script>
+						<?php }?>
+					</div>
+					<div class="dj-item-contact">
+						<?php if($itemUser){?>
+						<div class="contact">
+							<div class="contact-image-name">
+								<a href="index.php?option=com_djclassifieds&view=profile&uid=<?php echo $itemUser->id;?>">
+									<div class="contact-image" >
+										<img src="<?php echo $itemUser->avatar;?>" alt="">
+									</div>
+								</a>
+								<a href="index.php?option=com_djclassifieds&view=profile&uid=<?php echo $itemUser->id;?>" style="text-decoration:none;">
+									<div class="contact-name" href="index.php?option=com_djclassifieds&view=profile&uid=<?php echo $itemUser->id;?>">
+										<?php echo $itemUser->name;?>
+									</div>
+								</a>
+							</div>
+							<div class="contact-buttons">
+								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#make_offer">Make offer</button>
+								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#new_message">Ask</button>
+								<button type="button" class="btn btn-primary">Save</button>
+							</div>
+						</div>
+						<?php }?>
+					</div>
+					<div class="contact-buttons-helper">
+						<div class="modal fade" id="make_offer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Make an offer</h5>
+										<div class="modal-close" data-dismiss="modal" aria-label="Close">
+											<img aria-hidden="true" alt="" src="https://static.offerup.com/web/images/close-grey@2x.1e24e1bc.png" width="16"
+											    height="16" class="pointer">
+										</div>
+									</div>
+									<form method="POST">
+										<input type="text" class="fw" name="offer_price" value="2800.00">
+										<input type="submit" class="btn-primary btn-lg fw" value="Send">
+									</form>
+
+								</div>
+							</div>
+						</div>
+						<div class="modal fade" id="new_message" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Ask a question</h5>
+										<div class="modal-close" data-dismiss="modal" aria-label="Close">
+											<img aria-hidden="true" alt="" src="https://static.offerup.com/web/images/close-grey@2x.1e24e1bc.png" width="16"
+											    height="16" class="pointer">
+										</div>
+									</div>
+									<form method="POST">
+										<textarea placeholder="Message" rows="10" class="fw no-resize" name="message"></textarea>
+										<input type="submit" class="btn-primary btn-lg fw" value="Send">
+									</form>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<?php if(count($userItems)>0){?>
+				<div class="user-items">
+					<div class="user-items-header">
+						<h1>Other items for
+							<?php echo $itemUser->name.' ('.count($userItems).')';?>
+						</h1>
+					</div>
+					<div class=" swiper-container" id="sliderItems1">
+						<div class="swiper-wrapper">
+							<?php foreach($userItems as $k => $userItem){?>
+							<?php $user_itemImage=getImageOffer($userItem->id)[0];?>
+							<a href="" class="swiper-slide" data-itemid="<?php echo $k;?>">
+								<div class="card">
+									<div class="card-img-top" style="background-image:url(<?php echo $user_itemImage->path.$user_itemImage->name.'.'.$user_itemImage->ext;?>)"></div>
+									<div class="card-body">
+										<h5 class="card-title">
+											<?php echo $userItem->name;?>
+										</h5>
+										<p class="card-price">€
+											<?php echo $userItem->price;?>
+										</p>
+										<p class="card-location">
+											<?php echo $userItem->address;?>
+										</p>
+									</div>
+								</div>
+							</a>
+							<?php }?>
+						</div>
+					</div>
+					<script>
+						var swiper2 = new Swiper('#sliderItems1', {
+							slidesPerView: 4,
+							spaceBetween: 3,
+							breakpoints: {
+								576: {
+									slidesPerView: 2,
+									slidesPerColumn: 2,
+									spaceBetween: 3
+								}
+							}
+						});
+					</script>
+					<div class="user-items-footer">
+						<a href="/" style="
+                                            color: #00ab80;
+                                        ">
+							<span>See more items from Bichy</span>
+						</a>
+					</div>
+				</div>
+				<?php }?>
+			</div>
+		</div>
+	</div>
+	<script>
+		function windowSetting() {
+			if (jQuery(window).width() <= 576) {
+				var price = jQuery(
+					'#dj-item > div.dj-item-body > div.dj-item-wrapper > div.dj-item-details > div.item-info > div.item-price-subject > div.price'
+				).clone();
+				jQuery('#dj-item > div.dj-item-header').append(price);
+				var profile = jQuery(
+					'#dj-item > div.dj-item-body > div.dj-item-wrapper > div.dj-item-contact > div > div.contact-image-name').clone();
+				profile.insertAfter(
+					'#dj-item > div.dj-item-body > div.dj-item-wrapper > div.dj-item-details > div.item-description');
+				var saveBtn = jQuery(
+					'#dj-item > div.dj-item-body > div.dj-item-wrapper > div.dj-item-contact > div > div.contact-buttons > button:nth-child(3)'
+				).clone();
+				jQuery('#dj-item > div.dj-item-body > div.dj-item-wrapper > div.dj-item-details').append(
+					'<div class="item-buttons">' + saveBtn[0].outerHTML + '</div>');
+				saveBtn.css('display', 'none');
+			}
+		}
+		jQuery(document).ready(function () {
+			windowSetting();
+		});
+		jQuery(document).resize(function () {
+			windowSetting();
+		});
+	</script>
+	</div>

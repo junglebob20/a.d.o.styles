@@ -1,0 +1,50 @@
+.tab-pane,#msg-inbox{
+    form{
+        .msg-ui-buttons{
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: space-between;
+            align-items: center;
+            @media (max-width: 576px) {
+                flex-direction: column;
+            }
+            .btn-group{
+                margin: 0;
+                &:first-child{
+                    @media (max-width: 576px) {
+                        margin-bottom: 15px;
+                    }
+                }
+            }
+        }
+        .msg-ui-search{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            @media (max-width: 576px) {
+                align-items: center;
+            }
+            .form-search{
+                width: 250px;
+                input{
+                    margin-right: 10px;
+                }
+            }
+            .msg-ui-filters{
+                width: 250px;
+                #inbox-ms{
+                    width: 250px;
+                }
+            }
+        }
+        .msg-messages-table{
+            thead{
+                tr{
+                    &:first-child{
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
